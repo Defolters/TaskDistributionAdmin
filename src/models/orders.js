@@ -37,9 +37,11 @@ export const OrderCreate = props => (
                     <TextInput source="info" />
                     <NumberInput source="price" />
                     <ArrayInput source="taskTemplatesIds">
-                        <ReferenceInput label="Task Template" source="id" reference="task-templates">
-                            <SelectInput optionText="id" />
-                        </ReferenceInput>
+                        <SimpleFormIterator>
+                            <ReferenceInput label="Task Template" source="id" reference="task-templates">
+                                <SelectInput optionText="id" />
+                            </ReferenceInput>
+                        </SimpleFormIterator>
                     </ArrayInput>
                 </SimpleFormIterator>
             </ArrayInput>

@@ -1,10 +1,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-//const apiUrl = 'https://my.api.com/';
 const apiUrl = 'http://localhost:8080/v1/';
-
-//const httpClient = fetchUtils.fetchJson;
 
 const httpClient = (url, options = {}) => {
     console.log("url", url)
@@ -91,13 +88,16 @@ export default {
         }).then(({ json }) => ({ data: json }));
     },
 
-    create: (resource, params) =>
+    create: (resource, params) => {
+        console.log("URL", `${apiUrl}/${resource}`)
+        console.log("data", JSON.stringify(params.data))
         httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
             data: { ...params.data, id: json.id },
-        })),
+        }))
+    },
 
     delete: (resource, params) => {
         return httpClient(`${apiUrl}/${resource}`, {

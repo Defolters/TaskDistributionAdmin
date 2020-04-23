@@ -1,16 +1,16 @@
 import React from 'react';
-import { List, Datagrid, TextField, SimpleFormIterator, ArrayInput, ReferenceInput, SelectInput, NumberField, NumberInput, Create, SimpleForm, Edit, TextInput, DateField } from 'react-admin';
+import { List, Datagrid, TextField, Create, SimpleShowLayout, SimpleForm, Edit, TextInput, Show } from 'react-admin';
 
-export const WorkerTypesList = props => (
+export const WorkerTypeList = props => (
     <List {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid rowClick="show">
             <TextField source="id" />
             <TextField source="title" />
         </Datagrid>
     </List>
 );
 
-export const WorkerTypesEdit = props => (
+export const WorkerTypeEdit = props => (
     <Edit {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
@@ -19,11 +19,20 @@ export const WorkerTypesEdit = props => (
     </Edit>
 );
 
-export const WorkerTypesCreate = props => (
+export const WorkerTypeCreate = props => (
     <Create {...props}>
         <SimpleForm>
             <TextInput source="title" />
         </SimpleForm>
     </Create>
+);
+
+export const WorkerTypeShow = (props) => (
+    <Show {...props}>
+        <SimpleShowLayout>
+            <TextField source="id" />
+            <TextField source="title" />
+        </SimpleShowLayout>
+    </Show>
 );
 
