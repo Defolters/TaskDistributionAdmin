@@ -72,16 +72,19 @@ export default {
         }));
     },
 
-    update: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    update: (resource, params) => {
+        console.log("url", `${apiUrl}/${resource}/${params.id}`)
+        return httpClient(`${apiUrl}/${resource}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+        }).then(({ json }) => ({ data: json }))
+    },
 
     updateMany: (resource, params) => {
         const query = {
             filter: JSON.stringify({ id: params.ids }),
         };
+        console.log("URL", "URLMANY")
         return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
@@ -102,7 +105,7 @@ export default {
     delete: (resource, params) => {
         return httpClient(`${apiUrl}/${resource}`, {
             method: 'DELETE',
-            body: JSON.stringify({ id: [params.id] }),
+            body: JSON.stringify({ ids: [params.id] }),
         }).then(({ json }) => ({
             data: json,
         }))
@@ -111,7 +114,7 @@ export default {
     deleteMany: (resource, params) => {
         return httpClient(`${apiUrl}/${resource}`, {
             method: 'DELETE',
-            body: JSON.stringify({ id: params.ids }),
+            body: JSON.stringify({ ids: params.ids }),
         }).then(({ json }) => ({ data: json }));
     },
 };

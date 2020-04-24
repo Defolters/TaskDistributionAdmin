@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, TextField, BooleanField, BooleanInput, ReferenceField, ReferenceInput, SelectInput, NumberField, NumberInput, Create, SimpleForm, TextInput } from 'react-admin';
+import { List, Datagrid, Edit, TextField, BooleanField, BooleanInput, ReferenceField, ReferenceInput, SelectInput, NumberField, NumberInput, Create, SimpleForm, TextInput } from 'react-admin';
 
 export const TaskTemplateList = props => (
     <List {...props}>
@@ -21,17 +21,25 @@ export const TaskTemplateList = props => (
     </List>
 );
 
-/*
+
 export const TaskTemplateEdit = props => (
     <Edit {...props}>
         <SimpleForm>
-            <TextInput disabled source="id" />
-            <TextInput source="customerName" />
-            <TextInput source="customerEmail" />
-            <NumberField source="price" />
+            <ReferenceInput label="Item Template" source="itemTemplateId" reference="item-templates">
+                <SelectInput optionText="title" />
+            </ReferenceInput>
+            <ReferenceInput label="Task Template Dependency" source="taskTemplateDependencyId" reference="task-templates">
+                <SelectInput optionText="title" />
+            </ReferenceInput>
+            <ReferenceInput label="Worker Type" source="workerTypeId" reference="worker-types">
+                <SelectInput optionText="title" />
+            </ReferenceInput>
+            <TextInput source="title" />
+            <NumberInput source="timeToComplete" />
+            <BooleanInput source="isAdditional" />
         </SimpleForm>
     </Edit>
-);*/
+);
 
 export const TaskTemplateCreate = props => (
     <Create {...props}>
