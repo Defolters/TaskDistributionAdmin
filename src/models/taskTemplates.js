@@ -28,7 +28,7 @@ export const TaskTemplateEdit = props => (
             <ReferenceInput label="Item Template" source="itemTemplateId" reference="item-templates">
                 <SelectInput optionText="title" />
             </ReferenceInput>
-            <ReferenceInput label="Task Template Dependency" source="taskTemplateDependencyId" reference="task-templates">
+            <ReferenceInput label="Task Template Dependency" source="taskTemplateDependencyId" reference="task-templates" allowEmpty>
                 <SelectInput optionText="title" />
             </ReferenceInput>
             <ReferenceInput label="Worker Type" source="workerTypeId" reference="worker-types">
@@ -47,7 +47,7 @@ export const TaskTemplateCreate = props => (
             <ReferenceInput label="Item Template" source="itemTemplateId" reference="item-templates">
                 <SelectInput optionText="title" />
             </ReferenceInput>
-            <ReferenceInput label="Task Template Dependency" source="taskTemplateDependencyId" reference="task-templates">
+            <ReferenceInput label="Task Template Dependency" source="taskTemplateDependencyId" reference="task-templates" allowEmpty>
                 <SelectInput optionText="title" />
             </ReferenceInput>
             <ReferenceInput label="Worker Type" source="workerTypeId" reference="worker-types">

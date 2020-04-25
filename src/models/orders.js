@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, TextField, SimpleFormIterator, ArrayInput, ReferenceInput, SelectInput, NumberField, NumberInput, Create, SimpleForm, Edit, TextInput, DateField } from 'react-admin';
+import { List, Datagrid, TextField, SimpleFormIterator, ArrayInput, ReferenceFieldController, FormDataConsumer, SelectArrayInput, ReferenceArrayInput, ReferenceInput, SelectInput, NumberField, NumberInput, Create, SimpleForm, Edit, TextInput, DateField } from 'react-admin';
 
 export const OrderList = props => (
     <List {...props}>
@@ -34,18 +34,59 @@ export const OrderCreate = props => (
                     <ReferenceInput label="Item Template" source="itemTemplateId" reference="item-templates">
                         <SelectInput optionText="title" />
                     </ReferenceInput>
-                    <TextInput source="info" />
-                    <NumberInput source="price" />
-                    <ArrayInput source="taskTemplatesIds">
-                        <SimpleFormIterator>
-                            <ReferenceInput label="Task Template" source="id" reference="task-templates">
-                                <SelectInput optionText="id" />
-                            </ReferenceInput>
-                        </SimpleFormIterator>
-                    </ArrayInput>
+                    <TextInput label="Info" source="info" />
+                    <NumberInput label="Price" source="price" />
+                    <FormDataConsumer
+                        label="Task Templates"
+                    >
+                        {({
+                            formData, // The whole form data
+                            scopedFormData, // The data for this item of the ArrayInput
+                            getSource, // A function to get the valid source inside an ArrayInput
+                            ...rest
+                        }) => {
+                            console.log("item", formData.itemTemplateId)
+                            console.log("price", formData.price)
+                            console.log("email", formData.customerEmail)
+                            console.log("email", scopedFormData)
+                            return scopedFormData && scopedFormData.itemTemplateId &&
+                                <ReferenceArrayInput
+                                    label="Task Templates"
+                                    source={getSource("taskTemplatesIds")}
+                                    reference="task-templates"
+                                    {...rest}
+                                    filter={{ isAdditional: true, itemTemplateId: scopedFormData.itemTemplateId }}>
+                                    <SelectArrayInput label="Task Templates" optionText="title" />
+                                </ReferenceArrayInput>
+                        }
+                        }
+                    </FormDataConsumer>
                 </SimpleFormIterator>
             </ArrayInput>
         </SimpleForm>
     </Create>
 );
 
+/*
+<ReferenceArrayInput
+    source="taskTemplatesIds"
+    reference="task-templates"
+    filter={{ isAdditional: true, itemTemplateId:2 }}>
+    <SelectArrayInput optionText="title" />
+</ReferenceArrayInput>
+*/
+/*
+<FormDataConsumer>
+    {({ getSource, formData, ...rest }) => //formData.hasEmail &&
+        <ReferenceInput label="Task Template" source={getSource('id')} reference="task-templates" filter={{ isAdditional: true, itemTemplateId: formData.itemTemplateId}}>
+            <SelectInput optionText="title" />
+        </ReferenceInput>
+    }
+</FormDataConsumer>*/
+/*<ArrayInput source="taskTemplatesIds">
+    <SimpleFormIterator>
+        <ReferenceInput label="Task Template" source="id" reference="task-templates" filter={{ isAdditional: true}}>
+            <SelectInput optionText="title" />
+        </ReferenceInput>
+    </SimpleFormIterator>
+</ArrayInput>*/

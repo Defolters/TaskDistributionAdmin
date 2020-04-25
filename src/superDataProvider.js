@@ -94,7 +94,7 @@ export default {
     create: (resource, params) => {
         console.log("URL", `${apiUrl}/${resource}`)
         console.log("data", JSON.stringify(params.data))
-        httpClient(`${apiUrl}/${resource}`, {
+        return httpClient(`${apiUrl}/${resource}`, {
             method: 'POST',
             body: JSON.stringify(params.data),
         }).then(({ json }) => ({
