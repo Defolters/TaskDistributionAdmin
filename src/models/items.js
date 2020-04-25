@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Datagrid, TextField, ReferenceField, SimpleShowLayout, SimpleForm, Edit, TextInput, Show } from 'react-admin';
 
 export const ItemList = props => (
-    <List {...props}>
+    <List {...props} bulkActionButtons={false}>
         <Datagrid rowClick="show">
             <TextField source="id" />
             <ReferenceField label="orderId" source="orderId" reference="orders">
