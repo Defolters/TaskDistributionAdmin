@@ -6,14 +6,18 @@ import superDataProvider from '../superDataProvider'
 var confirm = window.confirm
 
 const Test = {
-    resources: [
+    workerTypes: [
         {
-            id: 'r1',
+            id: 1,
             name: 'Type1'
         },
         {
-            id: 'r7',
+            id: 2,
             name: 'Resource7Resource7Resource7Resource7Resource7',
+        },
+        {
+            id: 3,
+            name: 'TTTTERER',
         }
     ],
 
@@ -22,7 +26,7 @@ const Test = {
             id: 1,
             start: '2017-12-19 15:50:00',
             end: '2017-12-19 23:30:00',
-            resourceId: 'r1',
+            resourceId: 1,
             title: 'I am locked',
             movable: false,
             resizable: false,
@@ -32,7 +36,7 @@ const Test = {
             id: 7,
             start: '2017-12-19 15:40:00',
             end: '2017-12-20 23:30:00',
-            resourceId: 'r7',
+            resourceId: 2,
             title: 'I am exceptional',
             bgColor: '#FA9E95'
         },
@@ -45,21 +49,28 @@ class Basic extends Component {
     constructor(props) {
         super(props);
 
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
 
-        var schedulerData = new SchedulerData('2017-12-18', ViewTypes.Week);
+        today = yyyy + '-' + mm + '-' + dd;
+
+        var schedulerData = new SchedulerData(today, ViewTypes.Week);
         schedulerData.localeMoment.locale('en');
         this.state = {
             viewModel: schedulerData
         }
 
         console.log("prop", props)
-        var data = superDataProvider.getList('item-templates').then((json) => {
+        var data = superDataProvider.getList('schedule').then((json) => {
             console.log("promise", json)
-            // set data
             
-            //Test.tasks = []
+            Test.workerTypes = json.data.workerTypes
+            Test.tasks = json.data.tasks
+
             schedulerData.localeMoment.locale('en');
-            schedulerData.setResources(Test.resources);
+            schedulerData.setResources(Test.workerTypes);
             schedulerData.setEvents(Test.tasks);
 
             this.render()
