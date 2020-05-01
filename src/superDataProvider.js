@@ -18,14 +18,14 @@ const httpClient = (url, options = {}) => {
 
 export default {
     getList: (resource, params) => {
-        const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        const query = {
+        //const { page, perPage } = params.pagination;
+        //const { field, order } = params.sort;
+        /*const query = {
             sort: JSON.stringify([field, order]),
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(params.filter),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+        };*/
+        const url = `${apiUrl}/${resource}`;//?${stringify(query)}`;
 
         return httpClient(url).then(({ headers, json }) => {
             console.log("json", json.type)

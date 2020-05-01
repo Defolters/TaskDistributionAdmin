@@ -1,5 +1,7 @@
 // in src/App.js
 import React from 'react';
+//import Route from 'react';
+import { Route } from 'react-router-dom'
 import { Admin, Resource } from 'react-admin';
 
 import MyLoginPage from './MyLoginPage';
@@ -7,6 +9,7 @@ import authProvider from './authProvider';
 import MyLogoutButton from './MyLogoutButton'
 import superDataProvider from './superDataProvider'
 
+import Basic from './schedule/Basic'
 import { ItemList, ItemEdit, ItemShow } from './models/items'
 import { TaskList, TaskEdit, TaskShow } from './models/tasks'
 import { OrderList, OrderCreate, OrderEdit } from './models/orders'
@@ -16,7 +19,18 @@ import { WorkerTypeList, WorkerTypeCreate, WorkerTypeEdit, WorkerTypeShow } from
 
 
 const App = () => (
-  <Admin loginPage={MyLoginPage} logoutButton={MyLogoutButton} authProvider={authProvider} dataProvider={superDataProvider} >
+  <Admin
+    loginPage={MyLoginPage}
+    logoutButton={MyLogoutButton}
+    authProvider={authProvider}
+    dataProvider={superDataProvider}
+    customRoutes={[
+      <Route
+        path="/schedule"
+        component={Basic}
+      //noLayout
+      />,
+    ]}>
     <Resource name="orders" list={OrderList} edit={OrderEdit} create={OrderCreate} />
     <Resource name="items" list={ItemList} show={ItemShow} edit={ItemEdit} />
     <Resource name="tasks" list={TaskList} show={TaskShow} edit={TaskEdit} />
