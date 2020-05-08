@@ -7,17 +7,15 @@ const authProvider = {
             headers: new Headers({ 'Content-Type': 'application/json' }),
             
         });
-        //request.headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
-        ////request.headers.append('Access-Control-Allow-Credentials', 'true');
         console.log(request.stringify);
         return fetch(request)
             .then(response => {
                 console.log(response.status)
                 if (response.status < 200 || response.status >= 300) {
+                    console.log("throw")
                     throw new Error(response.statusText);
                 }
                 return response.text();
-                //return response.json();
             })
             .then(( token ) => {
                 console.log("token" + token)
