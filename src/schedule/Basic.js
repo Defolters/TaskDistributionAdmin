@@ -3,6 +3,12 @@ import Scheduler, { SchedulerData, ViewTypes } from 'react-big-scheduler'
 import withDragDropContext from './withDnDContext'
 import superDataProvider from '../superDataProvider'
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
 var confirm = window.confirm
 
 const Test = {
@@ -82,6 +88,16 @@ class Basic extends Component {
         const { viewModel } = this.state;
         return (
             <div>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" aria-label="menu">
+                            <ArrowBackIcon onClick={() => this.props.history.go(-1)} />
+                        </IconButton>
+                        <Typography variant="h6" >
+                            Расписание
+                    </Typography>
+                    </Toolbar>
+                </AppBar>
                 <div>
                     <Scheduler schedulerData={viewModel}
                         prevClick={this.prevClick}

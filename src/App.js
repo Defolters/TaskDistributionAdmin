@@ -1,9 +1,8 @@
-// in src/App.js
 import React from 'react';
-//import Route from 'react';
 import { Route } from 'react-router-dom'
 import { Admin, Resource } from 'react-admin';
 
+import Menu from './Menu';
 import SignIn from './SignIn';
 import authProvider from './authProvider';
 import MyLogoutButton from './MyLogoutButton'
@@ -24,11 +23,13 @@ const App = () => (
     logoutButton={MyLogoutButton}
     authProvider={authProvider}
     dataProvider={superDataProvider}
+    menu={Menu}
     customRoutes={[
       <Route
+        exact
         path="/schedule"
         component={Basic}
-      noLayout
+        noLayout
       />,
     ]}>
     <Resource name="orders" list={OrderList} edit={OrderEdit} create={OrderCreate} />
