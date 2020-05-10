@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-var confirm = window.confirm
 
 const Test = {
     workerTypes: [
@@ -62,7 +61,17 @@ class Basic extends Component {
 
         today = yyyy + '-' + mm + '-' + dd;
 
-        var schedulerData = new SchedulerData(today, ViewTypes.Week);
+        var schedulerData = new SchedulerData(today, ViewTypes.Week, false, false, {
+            startResizable: false,
+            endResizable: false,
+            movable: false,
+            creatable: false,
+            displayWeekend: false,
+            weekCellWidth: '16%',
+            dayStartFrom: 9,
+            dayStopTo: 18,
+            dayCellWidth: '4%',
+        });
         schedulerData.localeMoment.locale('en');
         this.state = {
             viewModel: schedulerData
@@ -105,14 +114,6 @@ class Basic extends Component {
                         onSelectDate={this.onSelectDate}
                         onViewChange={this.onViewChange}
                         eventItemClick={this.eventClicked}
-                        viewEventClick={this.ops1}
-                        viewEventText="Ops 1"
-                        viewEvent2Text="Ops 2"
-                        viewEvent2Click={this.ops2}
-                        updateEventStart={this.updateEventStart}
-                        updateEventEnd={this.updateEventEnd}
-                        moveEvent={this.moveEvent}
-                        newEvent={this.newEvent}
                         onScrollLeft={this.onScrollLeft}
                         onScrollRight={this.onScrollRight}
                         onScrollTop={this.onScrollTop}
@@ -157,67 +158,8 @@ class Basic extends Component {
     }
 
     eventClicked = (schedulerData, event) => {
-        alert(`You just clicked an event: {id: ${event.id}, title: ${event.title}}`);
+        alert(`Title: ${event.title}`);
     };
-
-    ops1 = (schedulerData, event) => {
-        alert(`You just executed ops1 to event: {id: ${event.id}, title: ${event.title}}`);
-    };
-
-    ops2 = (schedulerData, event) => {
-        alert(`You just executed ops2 to event: {id: ${event.id}, title: ${event.title}}`);
-    };
-
-    newEvent = (schedulerData, slotId, slotName, start, end, type, item) => {
-        if (confirm(`Do you want to create a new event? {slotId: ${slotId}, slotName: ${slotName}, start: ${start}, end: ${end}, type: ${type}, item: ${item}}`)) {
-
-            let newFreshId = 0;
-            schedulerData.events.forEach((item) => {
-                if (item.id >= newFreshId)
-                    newFreshId = item.id + 1;
-            });
-
-            let newEvent = {
-                id: newFreshId,
-                title: 'New event you just created',
-                start: start,
-                end: end,
-                resourceId: slotId,
-                bgColor: 'purple'
-            }
-            schedulerData.addEvent(newEvent);
-            this.setState({
-                viewModel: schedulerData
-            })
-        }
-    }
-
-    updateEventStart = (schedulerData, event, newStart) => {
-        if (confirm(`Do you want to adjust the start of the event? {eventId: ${event.id}, eventTitle: ${event.title}, newStart: ${newStart}}`)) {
-            schedulerData.updateEventStart(event, newStart);
-        }
-        this.setState({
-            viewModel: schedulerData
-        })
-    }
-
-    updateEventEnd = (schedulerData, event, newEnd) => {
-        if (confirm(`Do you want to adjust the end of the event? {eventId: ${event.id}, eventTitle: ${event.title}, newEnd: ${newEnd}}`)) {
-            schedulerData.updateEventEnd(event, newEnd);
-        }
-        this.setState({
-            viewModel: schedulerData
-        })
-    }
-
-    moveEvent = (schedulerData, event, slotId, slotName, start, end) => {
-        if (confirm(`Do you want to move the event? {eventId: ${event.id}, eventTitle: ${event.title}, newSlotId: ${slotId}, newSlotName: ${slotName}, newStart: ${start}, newEnd: ${end}`)) {
-            schedulerData.moveEvent(event, slotId, slotName, start, end);
-            this.setState({
-                viewModel: schedulerData
-            })
-        }
-    }
 
     onScrollRight = (schedulerData, schedulerContent, maxScrollLeft) => {
         if (schedulerData.ViewTypes === ViewTypes.Day) {
