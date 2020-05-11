@@ -69,7 +69,7 @@ class Basic extends Component {
             displayWeekend: false,
             weekCellWidth: '16%',
             dayStartFrom: 9,
-            dayStopTo: 18,
+            dayStopTo: 17,
             dayCellWidth: '4%',
         });
         schedulerData.localeMoment.locale('en');
