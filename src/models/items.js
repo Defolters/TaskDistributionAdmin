@@ -1,5 +1,8 @@
 import React from 'react';
-import { List, Datagrid, TextField, ReferenceField, SimpleShowLayout, SimpleForm, Edit, TextInput, Show } from 'react-admin';
+import {
+    List, Datagrid, TextField, ReferenceField, SimpleShowLayout, SimpleForm,
+    Edit, TextInput, Show, BooleanField
+} from 'react-admin';
 
 export const ItemList = props => (
     <List {...props} bulkActionButtons={false}>
@@ -11,6 +14,7 @@ export const ItemList = props => (
             <TextField source="title" />
             <TextField source="info" />
             <TextField source="price" />
+            <BooleanField source="isReady" />
         </Datagrid>
     </List>
 );

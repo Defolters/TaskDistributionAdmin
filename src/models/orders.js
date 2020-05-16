@@ -1,5 +1,7 @@
 import React from 'react';
-import { List, Datagrid, TextField, SimpleFormIterator, ArrayInput, ReferenceFieldController, FormDataConsumer, SelectArrayInput, ReferenceArrayInput, ReferenceInput, SelectInput, NumberField, NumberInput, Create, SimpleForm, Edit, TextInput, DateField } from 'react-admin';
+import { List, Datagrid, TextField, SimpleFormIterator, ArrayInput, FormDataConsumer, 
+    SelectArrayInput, ReferenceArrayInput, ReferenceInput, SelectInput, NumberField,
+     NumberInput, Create, SimpleForm, Edit, TextInput, DateField, BooleanField } from 'react-admin';
 
 export const OrderList = props => (
     <List {...props}>
@@ -9,6 +11,7 @@ export const OrderList = props => (
             <TextField source="customerEmail" />
             <NumberField source="price" />
             <DateField source="createdAt" />
+            <BooleanField source="isReady" />
         </Datagrid>
     </List>
 );

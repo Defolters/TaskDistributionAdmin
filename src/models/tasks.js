@@ -1,5 +1,8 @@
 import React from 'react';
-import { List, Datagrid, TextField, NumberField, ReferenceField, SimpleShowLayout, SimpleForm, Edit, TextInput, Show } from 'react-admin';
+import {
+    List, Datagrid, TextField, NumberField, ReferenceField, SimpleShowLayout,
+    SimpleForm, Edit, Show
+} from 'react-admin';
 
 export const TaskList = props => (
     <List {...props} bulkActionButtons={false}>
