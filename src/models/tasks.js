@@ -9,7 +9,7 @@ export const TaskList = props => (
         <Datagrid rowClick="show">
             <TextField source="id" />
             <ReferenceField label="itemId" source="itemId" reference="items">
-                <TextField source="title" />
+                <TextField source="id" />
             </ReferenceField>
             <ReferenceField label="taskDependencyId" source="taskDependencyId" reference="tasks">
                 <TextField source="title" />
