@@ -158,7 +158,7 @@ class Basic extends Component {
     }
 
     eventClicked = (schedulerData, event) => {
-        alert(`Title: ${event.title}`);
+        alert(`Title: ${event.title} Id: ${event.taskId}`);
     };
 
     onScrollRight = (schedulerData, schedulerContent, maxScrollLeft) => {
